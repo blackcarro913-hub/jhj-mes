@@ -11,7 +11,7 @@
     
     <style>
         :root {
-            --primary-lime: #cfff00;
+            --primary-lime: #cfff00; /* Amarelo do destaque */
             --footer-black: #000000;
             --footer-gray: #1a1a1a;
         }
@@ -19,7 +19,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: #000; color: #fff; overflow-x: hidden; }
 
-        /* SEÇÃO PRINCIPAL */
         .hero-section {
             width: 100%;
             min-height: 100vh;
@@ -43,7 +42,6 @@
         .nav-links { display: flex; gap: 25px; align-items: center; }
         .nav-links a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; }
 
-        /* BOTÃO COM BORDA DO CONCORRENTE */
         .btn-criar-conta {
             border: 1px solid rgba(255, 255, 255, 0.6);
             padding: 10px 24px;
@@ -52,7 +50,6 @@
             transition: 0.3s;
         }
 
-        /* CONTEÚDO */
         .main-wrapper {
             flex: 1;
             display: flex;
@@ -93,18 +90,26 @@
             width: 100%;
             padding: 18px;
             background-color: #f1f3f5;
-            border: none;
+            border: 2px solid transparent;
             border-radius: 14px;
             text-align: center;
             font-weight: 700;
             font-size: 19px;
             margin-bottom: 20px;
+            transition: 0.3s;
         }
 
-        .checkbox-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-        .checkbox-item { display: flex; gap: 10px; font-size: 12px; color: #555; line-height: 1.4; }
-        .checkbox-item input { width: 17px; height: 17px; flex-shrink: 0; }
+        .input-box:focus { outline: none; border-color: #dee2e6; }
 
+        .termos-pequenos {
+            font-size: 11px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* ESTILO DO BOTÃO - AMARELO E PRETO AO FICAR ATIVO */
         .btn-action {
             width: 100%;
             padding: 18px;
@@ -114,12 +119,20 @@
             border-radius: 12px;
             font-weight: 800;
             text-transform: uppercase;
+            transition: 0.3s ease;
         }
 
-        .btn-action.ready { background-color: #dee2e6; color: #495057; cursor: pointer; }
+        /* CLASSE ATIVADA PELO JS */
+        .btn-action.ready {
+            background-color: var(--primary-lime); /* Amarelo */
+            color: #000000; /* Preto */
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(207, 255, 0, 0.3);
+        }
+
         .link-card { display: block; text-align: center; margin-top: 20px; color: #000; font-weight: 800; text-decoration: underline; }
 
-        /* FOOTER COMPLETO */
+        /* FOOTER */
         .footer-full { width: 100%; }
         .atendimento-row {
             background-color: var(--footer-black);
@@ -136,40 +149,11 @@
             justify-content: space-between;
             align-items: center;
         }
-        .partner-group { display: flex; align-items: center; gap: 35px; }
-        .logo-partner { height: 26px; opacity: 0.8; }
-        .logo-partner.white { filter: brightness(0) invert(1); }
 
-        /* =============================================
-           RESPONSIVO MOBILE (IGUAL AO ANEXO)
-        ============================================= */
         @media (max-width: 991px) {
-            header { padding: 15px 5%; }
-            .nav-links a:not(.btn-criar-conta) { display: none; }
-            .logo-header { height: 38px; }
-
-            .main-wrapper {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px 20px 50px 20px; /* Encurta a página */
-            }
-
-            .headline-side h1 {
-                font-size: 38px; /* Texto compacto */
-                letter-spacing: -1px;
-                margin-bottom: 10px;
-            }
-
-            .headline-side p { font-size: 15px; margin-bottom: 25px; }
-
-            .search-card {
-                width: 100%;
-                padding: 30px 20px; /* Card menor */
-                border-radius: 22px;
-            }
-
-            .partners-row { flex-direction: column; gap: 30px; text-align: center; }
-            .partner-group { justify-content: center; }
+            .headline-side h1 { font-size: 38px; letter-spacing: -1px; }
+            .search-card { width: 100%; padding: 30px 20px; }
+            .partners-row { flex-direction: column; gap: 30px; }
         }
     </style>
 </head>
@@ -177,7 +161,7 @@
 
 <section class="hero-section">
     <header>
-        <img src="/logo (1).png" alt="Logo" class="logo-header">
+        <img src="https://i.postimg.cc/13wZDrVw/5a6fa450-4ff0-49d1-96a0-1068a6736035-CWdo-Jbug.png" alt="Logo" class="logo-header">
         <nav class="nav-links">
             <a href="#">Fazer Login</a>
             <a href="#">Perguntas frequentes</a>
@@ -197,16 +181,10 @@
             <form id="tollForm">
                 <input type="text" id="placa" class="input-box" placeholder="DIGITE SUA PLACA" maxlength="7">
                 
-                <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="chk">
-                        <span>Aceito os <a href="#" style="color: inherit;">Termos e Condições de Uso</a>.</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="chk">
-                        <span>Estou ciente da <a href="#" style="color: inherit;">Política de Privacidade</a>.</span>
-                    </label>
-                </div>
+                <p class="termos-pequenos">
+                    Ao consultar, você concorda com nossos <br>
+                    <b>Termos de Uso</b> e <b>Política de Privacidade</b>.
+                </p>
 
                 <button type="submit" id="btnSubmit" class="btn-action" disabled>Buscar débitos</button>
             </form>
@@ -221,30 +199,31 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <div class="partners-row">
-        <img src="/logo (1).png" alt="Logo" style="height: 40px;">
-        <div class="partner-group">
-            <img src="/logo-motiva.svg" alt="Motiva" class="logo-partner">
-            <img src="/logo-eco.png" alt="Ecorodovias" class="logo-partner white">
-        </div>
+        <img src="https://i.postimg.cc/13wZDrVw/5a6fa450-4ff0-49d1-96a0-1068a6736035-CWdo-Jbug.png" alt="Logo" style="height: 40px;">
+        <div style="color: #666; font-size: 12px;">© 2026 Pedágio Digital</div>
     </div>
 </footer>
 
 <script>
     const input = document.getElementById('placa');
-    const chks = document.querySelectorAll('.chk');
     const btn = document.getElementById('btnSubmit');
 
+    // Validação: apenas a placa é necessária agora
     function validate() {
-        const ok = input.value.length >= 7 && Array.from(chks).every(c => c.checked);
+        const ok = input.value.length >= 7;
         btn.disabled = !ok;
-        ok ? btn.classList.add('ready') : btn.classList.remove('ready');
+        if (ok) {
+            btn.classList.add('ready');
+        } else {
+            btn.classList.remove('ready');
+        }
     }
 
     input.addEventListener('input', (e) => {
+        // Formata a placa para maiúsculas e remove caracteres especiais
         e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
         validate();
     });
-    chks.forEach(c => c.addEventListener('change', validate));
 
     document.getElementById('tollForm').addEventListener('submit', (e) => {
         e.preventDefault();
