@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pedágio Digital</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8LLQ9CC6M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M8LLQ9CC6M');
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -22,7 +31,6 @@
             width: 100%;
         }
 
-        /* Ajuste do Background Mobile */
         .hero-section {
             width: 100%;
             min-height: 100vh;
@@ -33,7 +41,6 @@
             flex-direction: column;
         }
 
-        /* Header Compacto conforme imagem */
         header {
             display: flex;
             justify-content: space-between;
@@ -47,7 +54,7 @@
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .nav-right a {
@@ -61,11 +68,10 @@
 
         .btn-criar-conta {
             border: 1px solid #fff;
-            padding: 8px 15px;
+            padding: 8px 12px;
             border-radius: 10px;
         }
 
-        /* Conteúdo Principal Mobile */
         .main-wrapper {
             flex: 1;
             display: flex;
@@ -90,10 +96,8 @@
             font-size: 16px;
             opacity: 0.9;
             line-height: 1.3;
-            max-width: 90%;
         }
 
-        /* Card de Busca Mobile */
         .search-card {
             background-color: #fff;
             width: 100%;
@@ -135,7 +139,6 @@
             line-height: 1.3;
         }
 
-        /* Botão Amarelo e Preto */
         .btn-action {
             width: 100%;
             padding: 20px;
@@ -149,6 +152,7 @@
             transition: 0.3s;
         }
 
+        /* Amarelo e Preto quando placa digitada */
         .btn-action.ready {
             background-color: var(--primary-lime);
             color: #000;
@@ -205,7 +209,7 @@
             <h2>Um <b>único</b> lugar para <b>acessar</b> e <b>controlar</b> seus pagamentos.</h2>
             
             <form id="tollForm">
-                <input type="text" id="placa" class="input-box" placeholder="DIGITE SUA PLACA" maxlength="7" inputmode="text">
+                <input type="text" id="placa" class="input-box" placeholder="DIGITE SUA PLACA" maxlength="7" inputmode="text" autocomplete="off">
                 
                 <p class="termos-pequenos">
                     Ao consultar, você concorda com nossos <br>
