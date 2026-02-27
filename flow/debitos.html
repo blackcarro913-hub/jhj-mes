@@ -1,81 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Débitos</title>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Ubuntu',sans-serif;background:#f2f2f2;color:#333;min-height:100vh;padding-bottom:140px}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Débitos</title>
 
-/* Modal Overlay */
-.modal-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);padding:20px}
-.modal-box{width:100%;max-width:450px;border-radius:35px;background:#fff;padding:30px;text-align:center;position:relative}
-.modal-box::before { content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: #e0e0e0; border-radius: 10px; }
-.modal-title{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;color:red;margin-bottom:15px;font-size:22px;text-transform: uppercase;}
-.modal-subtitle { font-weight: 700; font-size: 16px; margin-bottom: 20px; color: #000; }
-.modal-text{font-size:14px;margin-bottom:20px;line-height:1.5; color: #333; text-align: center;}
-.modal-text b.red-text {color:red;font-weight:700}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8LLQ9CC6M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M8LLQ9CC6M');
+    </script>
 
-/* Box CTB */
-.ctb-box { text-align: left; border-left: 3px solid red; padding-left: 15px; margin: 20px 0; font-size: 13px; line-height: 1.4; }
-.ctb-box h3 { font-size: 15px; margin-bottom: 8px; font-weight: 700; }
-.ctb-box p { margin-bottom: 8px; color: #555; }
-.ctb-box span { display: block; margin-top: 5px; }
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Ubuntu',sans-serif;background:#f2f2f2;color:#333;min-height:100vh;padding-bottom:140px}
 
-.modal-btn{width:100%;border:none;border-radius:15px;background:#000;color:#fff;padding:18px;font-weight:700;font-size:16px;cursor:pointer;text-transform: uppercase; margin-top: 10px;}
+        /* Modal Overlay */
+        .modal-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);padding:20px}
+        .modal-box{width:100%;max-width:450px;border-radius:35px;background:#fff;padding:30px;text-align:center;position:relative}
+        .modal-box::before { content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: #e0e0e0; border-radius: 10px; }
+        .modal-title{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;color:red;margin-bottom:15px;font-size:22px;text-transform: uppercase;}
+        .modal-subtitle { font-weight: 700; font-size: 16px; margin-bottom: 20px; color: #000; }
+        .modal-text{font-size:14px;margin-bottom:20px;line-height:1.5; color: #333; text-align: center;}
+        .modal-text b.red-text {color:red;font-weight:700}
 
-/* Header */
-header{position:relative;display:flex;align-items:center;justify-content:center;height:56px;border-bottom:1px solid #e0e0e0;background:#fff}
-header button{position:absolute;left:16px;border:none;background:none;font-size:20px;cursor:pointer}
-header h1{font-size:16px;font-weight:500}
+        /* Box CTB */
+        .ctb-box { text-align: left; border-left: 3px solid red; padding-left: 15px; margin: 20px 0; font-size: 13px; line-height: 1.4; }
+        .ctb-box h3 { font-size: 15px; margin-bottom: 8px; font-weight: 700; }
+        .ctb-box p { margin-bottom: 8px; color: #555; }
+        .ctb-box span { display: block; margin-top: 5px; }
 
-/* Hero */
-.hero{position:relative;height:160px;background:#fff;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-label{position:absolute;bottom:35px;left:20px;z-index:5;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#fff}
+        .modal-btn{width:100%;border:none;border-radius:15px;background:#000;color:#fff;padding:18px;font-weight:700;font-size:16px;cursor:pointer;text-transform: uppercase; margin-top: 10px;}
 
-/* Plate */
-.plate-wrap{position:relative;z-index:10;margin-top:-28px;padding:0 20px}
-.plate-box{border-radius:8px;border:1px solid #eee;background:#fff;padding:16px 20px;font-size:15px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+        /* Header */
+        header{position:relative;display:flex;align-items:center;justify-content:center;height:56px;border-bottom:1px solid #e0e0e0;background:#fff}
+        header button{position:absolute;left:16px;border:none;background:none;font-size:20px;cursor:pointer}
+        header h1{font-size:16px;font-weight:500}
 
-/* Debt Section */
-.debt-section{padding:20px}
-.cb-row{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;margin-bottom:20px}
-.cb-row input{width:20px;height:20px;cursor:default;accent-color:#000}
+        /* Hero */
+        .hero{position:relative;height:160px;background:#fff;overflow:hidden}
+        .hero img{width:100%;height:100%;object-fit:cover}
+        .hero-label{position:absolute;bottom:35px;left:20px;z-index:5;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#fff}
 
-.debt-card{margin-bottom:24px; padding: 15px; background: #fff; border-radius: 12px; border: 1px solid #eee;}
-.debt-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
-.debt-top .plate{font-weight:700}
-.badge{border:1px solid #d32f2f;border-radius:8px;padding:2px 6px;font-size:10px;font-weight:700;color:#d32f2f}
-.debt-date{display:block;font-size:13px;color:#666;margin-bottom:6px}
-.debt-bottom{display:flex;align-items:flex-end;justify-content:space-between}
-.debt-bottom .operator{font-weight:700}
-.debt-bottom .amount{font-size:16px;font-weight:700}
+        /* Plate Box */
+        .plate-wrap{position:relative;z-index:10;margin-top:-28px;padding:0 20px}
+        .plate-box{border-radius:8px;border:1px solid #eee;background:#fff;padding:16px 20px;font-size:15px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.08)}
 
-/* Footer Bar */
-.footer-bar{position:fixed;bottom:0;left:0;z-index:100;width:100%;border-radius:16px 16px 0 0;background:#fff;padding:16px 20px;box-shadow:0 -4px 10px rgba(0,0,0,.05)}
-.footer-total-value{font-size:16px;font-weight:700;color:#000;margin-bottom:10px;display:block}
+        /* Debt Section */
+        .debt-section{padding:20px}
+        .cb-row{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;margin-bottom:20px}
+        .cb-row input{width:20px;height:20px;cursor:default;accent-color:#000}
 
-/* Botão Regularizar - Amarelo e Preto */
-.footer-btn{
-    width:100%;
-    border:none;
-    border-radius:12px;
-    padding:18px;
-    font-size:16px;
-    font-weight:800;
-    cursor:pointer;
-    background:#cfff00; 
-    color:#000000;      
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-.footer-btn:active { transform: scale(0.98); opacity: 0.9; }
+        .debt-card{margin-bottom:24px; padding: 15px; background: #fff; border-radius: 12px; border: 1px solid #eee;}
+        .debt-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+        .debt-top .plate{font-weight:700}
+        .badge{border:1px solid #d32f2f;border-radius:8px;padding:2px 6px;font-size:10px;font-weight:700;color:#d32f2f}
+        .debt-date{display:block;font-size:13px;color:#666;margin-bottom:6px}
+        .debt-bottom{display:flex;align-items:flex-end;justify-content:space-between}
+        .debt-bottom .operator{font-weight:700}
+        .debt-bottom .amount{font-size:16px;font-weight:700}
 
-.hidden{display:none}
-</style>
+        /* Footer */
+        .footer-bar{position:fixed;bottom:0;left:0;z-index:100;width:100%;border-radius:16px 16px 0 0;background:#fff;padding:16px 20px;box-shadow:0 -4px 10px rgba(0,0,0,.05)}
+        .footer-total-value{font-size:16px;font-weight:700;color:#000;margin-bottom:10px;display:block}
+
+        .footer-btn{
+            width:100%;
+            border:none;
+            border-radius:12px;
+            padding:18px;
+            font-size:16px;
+            font-weight:800;
+            cursor:pointer;
+            background:#cfff00; 
+            color:#000000;      
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .footer-btn:active { transform: scale(0.98); opacity: 0.9; }
+
+        .hidden{display:none}
+    </style>
 </head>
 <body>
 
@@ -150,7 +158,6 @@ function updateDynamicData() {
     const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
     const now = new Date();
     
-    // Data e Hora Atual
     const dia = String(now.getDate()).padStart(2, '0');
     const mes = String(now.getMonth() + 1).padStart(2, '0');
     const ano = now.getFullYear();
@@ -160,14 +167,10 @@ function updateDynamicData() {
     
     const diaSemana = dias[now.getDay()];
 
-    // Atualiza Badge de Vencimento
     document.getElementById('vencimentoBadge').textContent = `Venceu em ${dia}/${mes}/${ano}`;
     document.getElementById('currentFullDate').textContent = `${dia}/${mes}/${ano} ${hh}:${mm}:${ss}`;
-    
-    // Atualiza Tempo no Modal
     document.getElementById('modalFullTime').textContent = `Hoje, ${diaSemana} às ${hh}:${mm}`;
 
-    // Calcula Prazo de 15 Minutos
     const deadline = new Date(now.getTime() + 15 * 60000);
     const dHH = String(deadline.getHours()).padStart(2, '0');
     const dMM = String(deadline.getMinutes()).padStart(2, '0');
