@@ -2,158 +2,184 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pedágio Digital</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
     
     <style>
         :root {
-            --primary-lime: #cfff00; /* Amarelo do destaque */
-            --footer-black: #000000;
-            --footer-gray: #1a1a1a;
+            --primary-lime: #cfff00;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #000; color: #fff; overflow-x: hidden; }
+        
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            overflow-x: hidden;
+            width: 100%;
+        }
 
+        /* Ajuste do Background Mobile */
         .hero-section {
             width: 100%;
             min-height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
-                        url('/inicio-bg-B9TsfniF.png') no-repeat center center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://www.pedagiodigital.com/assets/home-KlC6Y-6S.png') no-repeat center center;
             background-size: cover;
             display: flex;
             flex-direction: column;
         }
 
+        /* Header Compacto conforme imagem */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 6%;
-            z-index: 10;
-        }
-
-        .logo-header { height: 50px; }
-
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; }
-
-        .btn-criar-conta {
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 10px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .main-wrapper {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 40px 6%;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 20px 5%;
             width: 100%;
         }
 
-        .headline-side { max-width: 700px; }
-        .headline-side h1 {
-            font-size: 78px;
-            font-weight: 900;
-            line-height: 0.95;
-            text-transform: uppercase;
-            letter-spacing: -4px;
-            margin-bottom: 20px;
-        }
-        .headline-side h1 span { color: var(--primary-lime); }
-        .headline-side p { font-size: 18px; opacity: 0.9; }
+        .logo-header { height: 35px; }
 
-        /* CARD DE BUSCA */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-right a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .btn-criar-conta {
+            border: 1px solid #fff;
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+
+        /* Conteúdo Principal Mobile */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .headline-side h1 {
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .headline-side h1 span { color: var(--primary-lime); }
+
+        .headline-side p {
+            margin-top: 15px;
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.3;
+            max-width: 90%;
+        }
+
+        /* Card de Busca Mobile */
         .search-card {
-            background-color: #f8f9fa;
-            width: 440px;
-            padding: 45px;
-            border-radius: 28px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            background-color: #fff;
+            width: 100%;
+            padding: 30px 20px;
+            border-radius: 30px;
             color: #000;
         }
 
-        .search-card h2 { font-size: 24px; font-weight: 500; margin-bottom: 30px; line-height: 1.2; }
+        .search-card h2 {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
         .search-card h2 b { font-weight: 800; }
 
         .input-box {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background-color: #f1f3f5;
             border: 2px solid transparent;
-            border-radius: 14px;
+            border-radius: 15px;
             text-align: center;
-            font-weight: 700;
-            font-size: 19px;
-            margin-bottom: 20px;
-            transition: 0.3s;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #000;
+            text-transform: uppercase;
         }
 
-        .input-box:focus { outline: none; border-color: #dee2e6; }
+        .input-box::placeholder { color: #adb5bd; font-weight: 700; }
 
         .termos-pequenos {
             font-size: 11px;
             color: #777;
             text-align: center;
             margin-bottom: 20px;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
-        /* ESTILO DO BOTÃO - AMARELO E PRETO AO FICAR ATIVO */
+        /* Botão Amarelo e Preto */
         .btn-action {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background-color: #e9ecef;
             color: #adb5bd;
             border: none;
-            border-radius: 12px;
-            font-weight: 800;
+            border-radius: 15px;
+            font-weight: 900;
             text-transform: uppercase;
-            transition: 0.3s ease;
+            font-size: 16px;
+            transition: 0.3s;
         }
 
-        /* CLASSE ATIVADA PELO JS */
         .btn-action.ready {
-            background-color: var(--primary-lime); /* Amarelo */
-            color: #000000; /* Preto */
+            background-color: var(--primary-lime);
+            color: #000;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(207, 255, 0, 0.3);
         }
 
-        .link-card { display: block; text-align: center; margin-top: 20px; color: #000; font-weight: 800; text-decoration: underline; }
-
-        /* FOOTER */
-        .footer-full { width: 100%; }
-        .atendimento-row {
-            background-color: var(--footer-black);
-            padding: 20px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-        }
-        .partners-row {
-            background-color: var(--footer-gray);
-            padding: 40px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .link-card {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #000;
+            font-weight: 800;
+            text-decoration: underline;
+            font-size: 14px;
         }
 
-        @media (max-width: 991px) {
-            .headline-side h1 { font-size: 38px; letter-spacing: -1px; }
-            .search-card { width: 100%; padding: 30px 20px; }
-            .partners-row { flex-direction: column; gap: 30px; }
+        footer {
+            background-color: #1a1a1a;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            height: 35px;
+            margin-bottom: 15px;
+        }
+
+        .cnpj-info {
+            color: #666;
+            font-size: 10px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -162,16 +188,16 @@
 <section class="hero-section">
     <header>
         <img src="https://i.postimg.cc/13wZDrVw/5a6fa450-4ff0-49d1-96a0-1068a6736035-CWdo-Jbug.png" alt="Logo" class="logo-header">
-        <nav class="nav-links">
-            <a href="#">Fazer Login</a>
-            <a href="#">Perguntas frequentes</a>
-            <a href="#" class="btn-criar-conta">Criar Conta</a>
-        </nav>
+        <div class="nav-right">
+            <a href="#">Fazer<br>Login</a>
+            <a href="#">Perguntas<br>frequentes</a>
+            <a href="#" class="btn-criar-conta">Criar<br>Conta</a>
+        </div>
     </header>
 
     <div class="main-wrapper">
         <div class="headline-side">
-            <h1>DESFRUTE DE TODA<br>A COMODIDADE DO<br>PEDÁGIO <span>DIGITAL</span></h1>
+            <h1>DESFRUTE DE<br>TODA A<br>COMODIDADE<br>DO PEDÁGIO<br><span>DIGITAL</span></h1>
             <p>Uma nova era para o pedágio começou: ágil e digital como tem que ser.</p>
         </div>
 
@@ -179,7 +205,7 @@
             <h2>Um <b>único</b> lugar para <b>acessar</b> e <b>controlar</b> seus pagamentos.</h2>
             
             <form id="tollForm">
-                <input type="text" id="placa" class="input-box" placeholder="DIGITE SUA PLACA" maxlength="7">
+                <input type="text" id="placa" class="input-box" placeholder="DIGITE SUA PLACA" maxlength="7" inputmode="text">
                 
                 <p class="termos-pequenos">
                     Ao consultar, você concorda com nossos <br>
@@ -193,34 +219,26 @@
     </div>
 </section>
 
-<footer class="footer-full">
-    <div class="atendimento-row">
-        <span>Central de atendimento</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-    </div>
-    <div class="partners-row">
-        <img src="https://i.postimg.cc/13wZDrVw/5a6fa450-4ff0-49d1-96a0-1068a6736035-CWdo-Jbug.png" alt="Logo" style="height: 40px;">
-        <div style="color: #666; font-size: 12px;">© 2026 Pedágio Digital</div>
-    </div>
+<footer>
+    <img src="https://i.postimg.cc/13wZDrVw/5a6fa450-4ff0-49d1-96a0-1068a6736035-CWdo-Jbug.png" alt="Logo" class="footer-logo">
+    <div class="cnpj-info">CNPJ: 58.291.831/0001-20</div>
 </footer>
 
 <script>
     const input = document.getElementById('placa');
     const btn = document.getElementById('btnSubmit');
 
-    // Validação: apenas a placa é necessária agora
     function validate() {
-        const ok = input.value.length >= 7;
-        btn.disabled = !ok;
-        if (ok) {
+        if (input.value.length >= 7) {
+            btn.disabled = false;
             btn.classList.add('ready');
         } else {
+            btn.disabled = true;
             btn.classList.remove('ready');
         }
     }
 
     input.addEventListener('input', (e) => {
-        // Formata a placa para maiúsculas e remove caracteres especiais
         e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
         validate();
     });
