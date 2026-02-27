@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pedágio Digital - Débitos</title>
+    <link rel="preload" href="/_next/static/media/caa3a2e1cccd8315-s.p.853070df.woff2" as="font" crossorigin="" type="font/woff2">
+    <link rel="stylesheet" href="/_next/static/chunks/6e5ba3e91b067f4a.css?dpl=dpl_GiF9YozzhjF8i6BKZCquENxVDvMB">
+    <link rel="icon" href="/icon-dark-32x32.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <style>
+        /* Garante que o modal de atenção aparece por cima de tudo */
+        #modal-atencao {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 9999;
+            padding: 0;
+        }
+        @media (min-width: 640px) {
+            #modal-atencao { align-items: center; padding: 16px; }
+        }
+        .modal-box {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            max-width: 512px;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+        @media (min-width: 640px) {
+            .modal-box { border-radius: 24px; }
+        }
+        /* Checkbox verde igual ao original */
+        .checkbox-checked {
+            width: 20px; height: 20px;
+            background: #a1e645;
+            border: 1px solid #a1e645;
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; margin-top: 4px;
+            cursor: not-allowed; opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="geist_9e050971-module__05dp7a__className font-sans antialiased">
+
+<!-- ═══════════════════════════════════════════════════════ PÁGINA PRINCIPAL -->
+<div class="min-h-screen bg-gray-100 pb-24">
+
+    <!-- HEADER -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center gap-4">
+            <button id="btn-voltar" class="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Voltar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-900"><path d="m15 18-6-6 6-6"></path></svg>
+            </button>
+            <h1 class="text-xl font-bold text-gray-900">Débitos</h1>
+        </div>
+    </header>
+
+    <!-- BANNER + CARD VEÍCULO -->
+    <section class="relative mb-6">
+        <div class="relative h-48 overflow-hidden">
+            <img alt="Banner" class="w-full h-full object-cover" src="../assets/home-KlC6Y-6S.png">
+        </div>
+        <div class="px-4 -mt-16 relative z-10">
+            <div class="bg-white rounded-xl shadow-lg p-4">
+                <div class="flex items-center justify-between gap-2 mb-3 flex-wrap">
+                    <div class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-600"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>
+                        <span class="text-sm text-gray-600 font-medium">Seus veículos:</span>
+                    </div>
+                    <div class="text-xs text-gray-500">Atualizado em: <span id="data-atualizacao" class="font-medium">--/--/----, --:--</span></div>
+                </div>
+                <div class="bg-white border border-gray-300 rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <p id="placa-veiculo" class="text-lg font-semibold text-gray-900 tracking-wide select-none">---</p>
+                        <button class="text-gray-400 hover:text-gray-600">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LISTA DE DÉBITOS -->
+    <section class="px-4 pb-6">
+        <div class="mb-4">
+            <h2 class="text-xl font-bold text-gray-900">Débitos</h2>
+        </div>
+        <div class="space-y-4">
+            <div class="bg-white rounded-xl shadow-sm p-4">
+                <div class="flex items-start gap-3">
+                    <!-- Checkbox marcado -->
+                    <div class="checkbox-checked">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <div class="flex items-center gap-2 flex-shrink-0">
+                                <span class="text-base text-gray-900 select-none">1</span>
+                                <span id="placa-debito" class="text-base font-bold text-gray-900 select-none">---</span>
+                            </div>
+                            <div id="data-debito" class="bg-black text-white text-xs font-medium px-3 py-1.5 rounded-full select-none whitespace-nowrap">--/--/----</div>
+                        </div>
+                        <p class="text-base font-bold text-gray-900 mb-2 select-none" id="titulo-debito">Tarifas de Pedágio do Veículo ---</p>
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                            <p class="text-sm text-gray-300 select-none blur-[3px]">Vala, Manduri, Vala, São Paulo</p>
+                        </div>
+                        <div class="flex justify-end">
+                            <p class="text-lg font-bold text-gray-900 select-none">R$ 73,46</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BARRA INFERIOR FIXA -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+        <div class="px-4 py-4 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <p class="text-3xl font-bold text-gray-900 select-none">R$ 73,46</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-600"><path d="m6 9 6 6 6-6"></path></svg>
+            </div>
+            <button id="btn-regularizar" class="bg-black text-[#c8ff00] hover:bg-gray-900 font-semibold px-8 h-12 text-base rounded-lg transition-colors" style="cursor:pointer">
+                Regularizar
+            </button>
+        </div>
+    </div>
+
+</div>
+<!-- ═══════════════════════════════════════════════════════ FIM PÁGINA -->
+
+
+<!-- ═══════════════════════════════════════════════════════ MODAL ATENÇÃO -->
+<div id="modal-atencao">
+    <div class="modal-box">
+        <!-- Barra de arraste -->
+        <div class="flex justify-center pt-3 pb-1">
+            <div class="w-12 h-1 bg-gray-300 rounded-full"></div>
+        </div>
+
+        <div class="px-5 py-5 sm:p-6 sm:pt-4">
+            <!-- Título -->
+            <div class="flex items-center justify-center gap-2 mb-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                <h2 class="text-2xl font-bold text-red-600">ATENÇÃO</h2>
+            </div>
+
+            <!-- Texto principal -->
+            <div class="mb-6 text-center">
+                <p class="text-lg font-bold text-gray-900 leading-relaxed mb-4">Débitos em aberto encontrados</p>
+                <p class="text-sm sm:text-base leading-relaxed text-gray-900 font-semibold">
+                    <span id="modal-data-hora" class="text-red-600 font-bold">Hoje, carregando...</span>
+                    - Caso não realize o pagamento, a multa será automaticamente encaminhada ao DETRAN. Após esse prazo de 15 minutos, caso você não realize o pagamento, o sistema emitirá automaticamente a multa de
+                    <span class="text-red-600 font-bold">R$ 195,23</span> e
+                    <span class="text-red-600 font-bold">5 pontos na CNH</span>.
+                </p>
+            </div>
+
+            <!-- Box do artigo -->
+            <div class="border-l-4 border-red-600 pl-4 pr-4 py-4 bg-red-50 rounded-r-lg mb-6">
+                <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-2">Art. 209-A - CTB:</h3>
+                <p class="text-xs sm:text-sm text-gray-800 leading-relaxed mb-3">
+                    Conforme o Art. 209-A do CTB: "Efetuar o pagamento de pedágio eletrônico fora do prazo estabelecido pelo órgão ou entidade de trânsito com circunscrição sobre a via."
+                </p>
+                <p class="text-xs sm:text-sm text-gray-800 mb-1"><span class="font-semibold">Infração:</span> <span class="text-red-600 font-bold">Grave.</span></p>
+                <p class="text-xs sm:text-sm text-gray-800 mb-1"><span class="font-semibold">Penalidade:</span> <span class="text-red-600 font-bold">Multa de R$ 195,23.</span></p>
+                <p class="text-xs sm:text-sm text-gray-800"><span class="font-semibold">Pontuação:</span> <span class="text-red-600 font-bold">5 pontos na CNH.</span></p>
+            </div>
+
+            <!-- Botão CONTINUAR -->
+            <button id="btn-continuar" class="w-full h-12 sm:h-14 text-sm sm:text-base font-bold bg-black text-[#c8ff00] hover:bg-gray-900 rounded-lg sm:rounded-xl transition-colors" style="cursor:pointer">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+</div>
+<!-- ═══════════════════════════════════════════════════════ FIM MODAL -->
+
+
+<script>
+(function () {
+    // ── 1. Placa da URL ──────────────────────────────────────────────────────
+    var params   = new URLSearchParams(window.location.search);
+    var placaRaw = (params.get('placa') || '').replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+    if (!placaRaw) placaRaw = 'TESTE12';
+    var placaFmt = placaRaw.length > 3
+        ? placaRaw.slice(0, 3) + '-' + placaRaw.slice(3)
+        : placaRaw;
+
+    // ── 2. Data/hora atual ───────────────────────────────────────────────────
+    function getDt() {
+        var now  = new Date();
+        var dias = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+        var d    = String(now.getDate()).padStart(2, '0');
+        var m    = String(now.getMonth() + 1).padStart(2, '0');
+        var a    = now.getFullYear();
+        var h    = String(now.getHours()).padStart(2, '0');
+        var min  = String(now.getMinutes()).padStart(2, '0');
+        return {
+            dataHora : d + '/' + m + '/' + a + ', ' + h + ':' + min,
+            dataCard : d + '/' + m + '/' + a,
+            diaSemana: dias[now.getDay()],
+            hora     : h + ':' + min
+        };
+    }
+
+    // ── 3. Preenche os campos estáticos ──────────────────────────────────────
+    function preencher() {
+        var dt = getDt();
+
+        // Placa
+        document.getElementById('placa-veiculo').textContent = placaFmt;
+        document.getElementById('placa-debito').textContent  = placaFmt;
+        document.getElementById('titulo-debito').textContent = 'Tarifas de Pedágio do Veículo ' + placaFmt;
+
+        // Datas
+        document.getElementById('data-atualizacao').textContent = dt.dataHora;
+        document.getElementById('data-debito').textContent      = dt.dataCard;
+
+        // Modal: "Hoje, Quinta-feira às 20:30"
+        document.getElementById('modal-data-hora').textContent =
+            'Hoje, ' + dt.diaSemana + ' às ' + dt.hora;
+    }
+
+    preencher();
+
+    // Atualiza hora a cada minuto
+    setInterval(function () {
+        var dt = getDt();
+        document.getElementById('data-atualizacao').textContent = dt.dataHora;
+        document.getElementById('modal-data-hora').textContent  =
+            'Hoje, ' + dt.diaSemana + ' às ' + dt.hora;
+    }, 60000);
+
+    // ── 4. Comportamento do modal ────────────────────────────────────────────
+    var modal = document.getElementById('modal-atencao');
+
+    // CONTINUAR → fecha o modal, mostra a página
+    document.getElementById('btn-continuar').addEventListener('click', function () {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+
+    // Clique no fundo escuro → também fecha
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Bloqueia scroll da página enquanto modal aberto
+    document.body.style.overflow = 'hidden';
+
+    // ── 5. Botão Regularizar → redireciona para checkout ────────────────────
+    document.getElementById('btn-regularizar').addEventListener('click', function () {
+        window.location.href = 'https://checkout.ecovias.sbs/VCCL1O8SCIKV';
+    });
+
+    // ── 6. Botão Voltar ──────────────────────────────────────────────────────
+    document.getElementById('btn-voltar').addEventListener('click', function () {
+        history.back();
+    });
+
+})();
+</script>
+
+</body>
+</html>
