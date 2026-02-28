@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Débitos</title>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8LLQ9CC6M"></script>
@@ -13,115 +13,106 @@
       gtag('config', 'G-M8LLQ9CC6M');
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Ubuntu',sans-serif;background:#f8f9fa;color:#333;min-height:100vh;padding-bottom:120px}
+        body{font-family:'Inter', sans-serif;background:#f8f9fa;color:#333;min-height:100vh;padding-bottom:120px}
 
         /* Modal Overlay */
-        .modal-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);padding:20px}
-        .modal-box{width:100%;max-width:450px;border-radius:35px;background:#fff;padding:30px;text-align:center;position:relative}
-        .modal-box::before { content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: #e0e0e0; border-radius: 10px; }
-        .modal-title{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;color:red;margin-bottom:15px;font-size:22px;text-transform: uppercase;}
-        .modal-subtitle { font-weight: 700; font-size: 16px; margin-bottom: 20px; color: #000; }
-        .modal-text{font-size:14px;margin-bottom:20px;line-height:1.5; color: #333; text-align: center;}
-        .modal-text b.red-text {color:red;font-weight:700}
+        .modal-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.6);padding:10px}
+        .modal-box{width:100%;max-width:450px;border-radius:30px;background:#fff;padding:35px 25px;text-align:center;position:relative;animation: slideUp 0.3s ease-out;}
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        .modal-box::before { content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 35px; height: 4px; background: #e0e0e0; border-radius: 10px; }
+        
+        .modal-title{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;color:#d90429;margin-bottom:20px;font-size:20px;}
+        .modal-subtitle { font-weight: 700; font-size: 17px; margin-bottom: 15px; color: #000; }
+        .modal-text{font-size:14px;margin-bottom:20px;line-height:1.5; color: #000;}
+        .modal-text b.red-text {color:#d90429;font-weight:700}
 
-        /* Box CTB */
-        .ctb-box { text-align: left; border-left: 3px solid red; padding-left: 15px; margin: 20px 0; font-size: 13px; line-height: 1.4; }
-        .ctb-box h3 { font-size: 15px; margin-bottom: 8px; font-weight: 700; }
-        .ctb-box p { margin-bottom: 8px; color: #555; }
-        .ctb-box span { display: block; margin-top: 5px; }
+        .ctb-box { text-align: left; border-left: 3px solid #d90429; padding: 10px 15px; margin: 20px 0; font-size: 13px; background: #fffcfc; border-radius: 0 12px 12px 0; }
+        .ctb-box h3 { font-size: 14px; margin-bottom: 8px; font-weight: 700; }
+        .ctb-box p { margin-bottom: 8px; color: #444; }
+        .ctb-box span { display: block; margin-top: 3px; }
 
-        .modal-btn{width:100%;border:none;border-radius:15px;background:#000;color:#fff;padding:18px;font-weight:700;font-size:16px;cursor:pointer;text-transform: uppercase; margin-top: 10px;}
+        .modal-btn{width:100%;border:none;border-radius:12px;background:#000;color:#cfff00;padding:18px;font-weight:700;font-size:16px;cursor:pointer;text-transform: uppercase;}
 
         /* Header */
-        header{position:relative;display:flex;align-items:center;justify-content:flex-start;padding: 0 20px;height:65px;background:#fff}
-        header button{border:none;background:none;font-size:24px;cursor:pointer;margin-right: 20px;}
-        header h1{font-size:20px;font-weight:700}
+        header{display:flex;align-items:center;padding: 0 20px;height:70px;background:#fff;border-bottom: 1px solid #f0f0f0;}
+        header button{border:none;background:none;cursor:pointer;margin-right: 15px; display: flex; align-items: center;}
+        header h1{font-size:20px;font-weight:700; color: #1a1a1a;}
 
-        /* Hero Image */
-        .hero{position:relative;height:240px;overflow:hidden}
+        /* Hero */
+        .hero{height:200px; width:100%; overflow:hidden}
         .hero img{width:100%;height:100%;object-fit:cover}
 
         /* Card flutuante da placa */
         .plate-floating-card {
-            margin: -60px 20px 0 20px;
+            margin: -50px 20px 0 20px;
             background: #fff;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
             position: relative;
             z-index: 10;
         }
-        .card-header-info { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #666; font-weight: 500; }
-        .card-update-time { font-size: 12px; color: #999; margin-top: 4px; display: block; }
+        .card-header-info { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #666; font-weight: 600; }
+        .card-update-time { font-size: 12px; color: #999; margin-top: 5px; display: block; }
         
         .plate-input-display {
-            margin-top: 20px;
-            border: 1px solid #e0e0e0;
+            margin-top: 15px;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 15px;
+            padding: 14px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            color: #000;
         }
 
-        /* Section Débitos */
-        .debt-section { padding: 30px 20px; }
-        .section-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; }
+        /* Seção Débitos */
+        .debt-section { padding: 25px 20px; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; }
 
         .debt-card-new {
             background: #fff;
-            border-radius: 20px;
+            border-radius: 18px;
             padding: 20px;
             border: 1px solid #f0f0f0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
-        .debt-row-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
-        .check-container { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 16px; }
-        .check-container input { width: 22px; height: 22px; accent-color: #cfff00; }
-        .date-badge { background: #000; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .debt-row-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .check-container { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; }
+        .check-container input { width: 20px; height: 20px; accent-color: #cfff00; }
+        .date-badge { background: #000; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 
-        .debt-details { margin-left: 35px; }
-        .debt-details h4 { font-size: 15px; font-weight: 700; color: #333; line-height: 1.4; }
+        .debt-details { margin-left: 30px; }
+        .debt-details h4 { font-size: 15px; font-weight: 700; color: #1a1a1a; line-height: 1.4; }
         
-        /* ESTILO BORRADO (BLUR) */
-        .blur-text { 
-            font-size: 13px; 
-            color: #aaa; 
-            margin-top: 5px; 
-            filter: blur(4px); 
-            user-select: none;
-        }
-        
-        .debt-price { display: block; text-align: right; font-size: 20px; font-weight: 700; margin-top: 10px; }
+        .blur-text { font-size: 13px; color: #ccc; margin-top: 4px; filter: blur(3px); user-select: none; }
+        .debt-price { display: block; text-align: right; font-size: 19px; font-weight: 700; margin-top: 5px; color: #000; }
 
         /* Rodapé Fixo */
         .bottom-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            bottom: 0; left: 0; width: 100%;
             background: #fff;
-            padding: 20px;
+            padding: 15px 20px 25px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-top: 1px solid #eee;
             z-index: 100;
         }
-        .total-price-group { display: flex; align-items: center; gap: 8px; font-size: 24px; font-weight: 700; }
-        .total-price-group svg { width: 18px; height: 18px; margin-top: 4px; }
+        .total-price-group { display: flex; align-items: center; gap: 5px; font-size: 26px; font-weight: 700; }
+        .total-price-group svg { width: 20px; height: 20px; margin-top: 2px; color: #666; }
 
         .btn-regularizar {
             background: #000;
-            color: #fff;
+            color: #cfff00;
             border: none;
-            padding: 15px 35px;
+            padding: 14px 28px;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 700;
@@ -135,12 +126,15 @@
 
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
-    <div class="modal-title">⚠ ATENÇÃO</div>
+    <div class="modal-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
+        ATENÇÃO
+    </div>
     <div class="modal-subtitle">Débitos em aberto encontrados</div>
     
     <p class="modal-text">
-      <b class="red-text" id="modalFullTime"></b> - Caso não realize o pagamento, a multa será automaticamente encaminhada ao DETRAN. 
-      Após esse prazo de <b>15 minutos (até <span id="deadlineTime">--:--</span>)</b>, caso você não realize o pagamento, o sistema emitirá automaticamente a multa de 
+      <b class="red-text" id="deadlinePhrase">Hoje, Sábado até às 14:02</b> - Caso não realize o pagamento, a multa será automaticamente encaminhada ao DETRAN. 
+      Após esse prazo, caso você não realize o pagamento, o sistema emitirá automaticamente a multa de 
       <b class="red-text">R$ 195,23</b> e <b class="red-text">5 pontos na CNH</b>.
     </p>
 
@@ -157,7 +151,9 @@
 </div>
 
 <header>
-  <button onclick="history.back()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <button onclick="history.back()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
   <h1>Débitos</h1>
 </header>
 
@@ -174,7 +170,7 @@
 
     <div class="plate-input-display">
         <span id="displayPlate">PLACA</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cbd5e0" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
     </div>
 </div>
 
@@ -187,7 +183,7 @@
                 <input type="checkbox" checked onclick="return false;">
                 1 &nbsp; <span id="cardPlate">PLACA</span>
             </label>
-            <span class="date-badge" id="badgeDate">27/02/2026</span>
+            <span class="date-badge" id="badgeDate">--/--/----</span>
         </div>
 
         <div class="debt-details">
@@ -201,7 +197,7 @@
 <div class="bottom-bar">
     <div class="total-price-group">
         R$ 68,21
-        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <button class="btn-regularizar" onclick="pay()">Regularizar</button>
 </div>
@@ -209,6 +205,7 @@
 <script>
 const params = new URLSearchParams(location.search);
 const plate = (params.get('placa') || 'PLACA').toUpperCase();
+
 document.getElementById('displayPlate').textContent = plate;
 document.getElementById('cardPlate').textContent = plate;
 document.getElementById('textPlate').textContent = plate;
@@ -225,14 +222,17 @@ function updateDynamicData() {
     
     const diaSemana = dias[now.getDay()];
 
+    // Atualiza a data de consulta no card
     document.getElementById('updateDate').textContent = `Atualizado em: ${dia}/${mes}/${ano}, ${hh}:${mm}`;
     document.getElementById('badgeDate').textContent = `${dia}/${mes}/${ano}`;
     
-    document.getElementById('modalFullTime').textContent = `Hoje, ${diaSemana} às ${hh}:${mm}`;
+    // Calcula Horário Atual + 15 minutos para a Copy
     const deadline = new Date(now.getTime() + 15 * 60000);
     const dHH = String(deadline.getHours()).padStart(2, '0');
     const dMM = String(deadline.getMinutes()).padStart(2, '0');
-    document.getElementById('deadlineTime').textContent = `${dHH}:${dMM}`;
+    
+    // Frase unificada: "Hoje, Sábado até às 14:02"
+    document.getElementById('deadlinePhrase').textContent = `Hoje, ${diaSemana} até às ${dHH}:${dMM}`;
 }
 
 updateDynamicData();
